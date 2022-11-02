@@ -14,11 +14,12 @@ import com.bumptech.glide.Glide;
 import com.rjzim.mygrocerystore.R;
 import com.rjzim.mygrocerystore.models.PopularModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<PopularModel> popularModelList;
 
     public PopularAdapters(Context context, List<PopularModel> popularModelList) {
