@@ -1,23 +1,27 @@
 package com.rjzim.mygrocerystore.models;
 
-public class NavCategoryModel {
+import java.io.Serializable;
+
+public class ViewAllModel implements Serializable {
 
     String name;
     String description;
-    String discount;
+    String ratting;
     String img_url;
     String type;
+    int price;
 
-    public NavCategoryModel() {
+    public ViewAllModel() {
 
     }
 
-    public NavCategoryModel(String name, String description, String discount, String img_url, String type) {
+    public ViewAllModel(String name, String description, String ratting, String img_url, String type, int price) {
         this.name = name;
         this.description = description;
-        this.discount = discount;
+        this.ratting = ratting;
         this.img_url = img_url;
         this.type = type;
+        this.price = price;
     }
 
     public String getName() {
@@ -36,12 +40,12 @@ public class NavCategoryModel {
         this.description = description;
     }
 
-    public String getDiscount() {
-        return discount;
+    public String getRatting() {
+        return ratting;
     }
 
-    public void setDiscount(String discount) {
-        this.discount = discount;
+    public void setRatting(String ratting) {
+        this.ratting = ratting;
     }
 
     public String getImg_url() {
@@ -58,5 +62,13 @@ public class NavCategoryModel {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

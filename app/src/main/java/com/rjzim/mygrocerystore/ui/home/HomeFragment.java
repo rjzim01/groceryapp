@@ -112,6 +112,8 @@ public class HomeFragment extends Fragment {
                                 HomeCategory homeCategory = document.toObject(HomeCategory.class);
                                 categoryList.add(homeCategory);
                                 homeAdapters.notifyDataSetChanged();
+
+
                             }
                         } else {
                             Toast.makeText(getActivity(), "Error" + task.getException(), Toast.LENGTH_SHORT).show();
@@ -136,6 +138,8 @@ public class HomeFragment extends Fragment {
                                 RecommendedModel recommendedModel = document.toObject(RecommendedModel.class);
                                 recommendedModelList.add(recommendedModel);
                                 recommendedAdapters.notifyDataSetChanged();
+
+
                             }
                         } else {
                             Toast.makeText(getActivity(), "Error" + task.getException(), Toast.LENGTH_SHORT).show();

@@ -13,18 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rjzim.mygrocerystore.R;
-import com.rjzim.mygrocerystore.activities.NavCategoryActivity;
-import com.rjzim.mygrocerystore.activities.ViewAllActivity;
-import com.rjzim.mygrocerystore.models.NavCategoryModel;
+import com.rjzim.mygrocerystore.activities.DetailedActivity;
+import com.rjzim.mygrocerystore.models.ViewAllModel;
 
 import java.util.List;
 
-public class NavCategoryAdapter extends RecyclerView.Adapter<NavCategoryAdapter.ViewHolder> {
+public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHolder> {
 
     Context context;
-    private List<NavCategoryModel> list;
+    List<ViewAllModel> list;
 
-    public NavCategoryAdapter(Context context, List<NavCategoryModel> list) {
+    public ViewAllAdapter(Context context, List<ViewAllModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -32,7 +31,7 @@ public class NavCategoryAdapter extends RecyclerView.Adapter<NavCategoryAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.nav_cat_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_all_item,parent,false));
     }
 
     @Override
@@ -41,13 +40,22 @@ public class NavCategoryAdapter extends RecyclerView.Adapter<NavCategoryAdapter.
         Glide.with(context).load(list.get(position).getImg_url()).into(holder.imageView);
         holder.name.setText(list.get(position).getName());
         holder.description.setText(list.get(position).getDescription());
-        holder.discount.setText(list.get(position).getDiscount());
+        holder.ratting.setText(list.get(position).getRatting());
+        holder.price.setText(list.get(position).getPrice() + "/kg");
+
+        if (list.get(position).getType().equals("egg")){
+            holder.price.setText(list.get(position).getPrice() + "/dozen");
+        }
+
+        if (list.get(position).getType().equals("milk")){
+            holder.price.setText(list.get(position).getPrice() + "/litre");
+        }
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, NavCategoryActivity.class);
-                i.putExtra("type", list.get(holder.getAdapterPosition()).getType());
+                Intent i = new Intent(context, DetailedActivity.class);
+                i.putExtra("detail",list.get(holder.getAdapterPosition()));
                 context.startActivity(i);
             }
         });
@@ -62,16 +70,16 @@ public class NavCategoryAdapter extends RecyclerView.Adapter<NavCategoryAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView name,description,discount;
+        TextView name,description,price,ratting;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.cat_nav_img);
-            name = itemView.findViewById(R.id.nav_cat_name);
-            description = itemView.findViewById(R.id.nav_cat_des);
-            discount = itemView.findViewById(R.id.nav_cat_discount);
-
+            imageView = itemView.findViewById(R.id.view_img);
+            description = itemView.findViewById(R.id.view_des);
+            price = itemView.findViewById(R.id.view_price);
+            ratting = itemView.findViewById(R.id.view_ratting);
+            name = itemView.findViewById(R.id.view_name);
         }
     }
 }

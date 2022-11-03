@@ -1,6 +1,7 @@
 package com.rjzim.mygrocerystore.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rjzim.mygrocerystore.R;
+import com.rjzim.mygrocerystore.activities.ViewAllActivity;
 import com.rjzim.mygrocerystore.models.HomeCategory;
 
 import java.util.List;
@@ -34,8 +36,19 @@ public class HomeAdapters extends RecyclerView.Adapter<HomeAdapters.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Glide.with(context).load(categoryList.get(position).getImg_url()).into(holder.catImg);
         holder.name.setText(categoryList.get(position).getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewAllActivity.class);
+                intent.putExtra("type",categoryList.get(holder.getAdapterPosition()).getType());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
